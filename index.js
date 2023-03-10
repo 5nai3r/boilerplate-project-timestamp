@@ -31,11 +31,25 @@ app.get("/api/", function (req, res) {
     utc: utcRes
   }
   );
+
 });
+
 app.get("/api/:data", function (req, res) {
+  let dateObj
+  if(isNaN(req.params.data)){
+  dateObj = new Date(req.params.data);
+  }
+  else{
+  dateObj = new Date( parseInt(req.params.data));
+  }
+  unixRes = dateObj.getTime();
+  utcRes = dateObj.toUTCString()
+
   res.json({
-    name :'dsds'
-  });
+    unix: unixRes,
+    utc: utcRes
+  }
+  );
 });
 
 
